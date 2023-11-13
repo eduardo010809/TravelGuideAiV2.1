@@ -1,4 +1,4 @@
-#Thu Nov 09 11:57:28 CST 2023
+#Mon Nov 13 12:34:25 CST 2023
 base.0=C\:\\Users\\eduar\\AndroidStudioProjects\\TravelGuideAiV21\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\eduar\\AndroidStudioProjects\\TravelGuideAiV21\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\eduar\\AndroidStudioProjects\\TravelGuideAiV21\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex

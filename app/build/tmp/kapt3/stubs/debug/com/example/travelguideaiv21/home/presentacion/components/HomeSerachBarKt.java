@@ -6,6 +6,7 @@ import java.lang.System;
 public final class HomeSerachBarKt {
     
     @androidx.compose.runtime.Composable
+    @kotlin.OptIn(markerClass = {androidx.compose.material3.ExperimentalMaterial3Api.class})
     public static final void HomeSearchBar(@org.jetbrains.annotations.NotNull
     kotlin.jvm.functions.Function0<kotlin.Unit> onSearch, @org.jetbrains.annotations.NotNull
     java.lang.String placeholder, @org.jetbrains.annotations.NotNull
