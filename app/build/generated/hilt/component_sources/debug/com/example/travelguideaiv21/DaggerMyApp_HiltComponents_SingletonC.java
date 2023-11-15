@@ -6,7 +6,11 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import com.example.travelguideaiv21.home.data.remote.ChatGptApi;
 import com.example.travelguideaiv21.home.di.HomeModule;
+import com.example.travelguideaiv21.home.di.HomeModule_ProvideApiFactory;
+import com.example.travelguideaiv21.home.di.HomeModule_ProvideRepositoryFactory;
+import com.example.travelguideaiv21.home.domain.HomeRepository;
 import com.example.travelguideaiv21.home.presentacion.HomeViewModel;
 import com.example.travelguideaiv21.home.presentacion.HomeViewModel_HiltModules_KeyModule_ProvideFactory;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -448,7 +452,7 @@ public final class DaggerMyApp_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.example.travelguideaiv21.home.presentacion.HomeViewModel 
-          return (T) new HomeViewModel();
+          return (T) new HomeViewModel(singletonCImpl.provideRepositoryProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -527,9 +531,20 @@ public final class DaggerMyApp_HiltComponents_SingletonC {
   private static final class SingletonCImpl extends MyApp_HiltComponents.SingletonC {
     private final SingletonCImpl singletonCImpl = this;
 
+    private Provider<ChatGptApi> provideApiProvider;
+
+    private Provider<HomeRepository> provideRepositoryProvider;
+
     private SingletonCImpl() {
 
+      initialize();
 
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initialize() {
+      this.provideApiProvider = DoubleCheck.provider(new SwitchingProvider<ChatGptApi>(singletonCImpl, 1));
+      this.provideRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<HomeRepository>(singletonCImpl, 0));
     }
 
     @Override
@@ -549,6 +564,31 @@ public final class DaggerMyApp_HiltComponents_SingletonC {
     @Override
     public ServiceComponentBuilder serviceComponentBuilder() {
       return new ServiceCBuilder(singletonCImpl);
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final SingletonCImpl singletonCImpl;
+
+      private final int id;
+
+      SwitchingProvider(SingletonCImpl singletonCImpl, int id) {
+        this.singletonCImpl = singletonCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // com.example.travelguideaiv21.home.domain.HomeRepository 
+          return (T) HomeModule_ProvideRepositoryFactory.provideRepository(singletonCImpl.provideApiProvider.get());
+
+          case 1: // com.example.travelguideaiv21.home.data.remote.ChatGptApi 
+          return (T) HomeModule_ProvideApiFactory.provideApi();
+
+          default: throw new AssertionError(id);
+        }
+      }
     }
   }
 }

@@ -1,10 +1,12 @@
 package com.example.travelguideaiv21.home.presentacion;
 
+import com.example.travelguideaiv21.home.domain.HomeRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
+import javax.inject.Provider;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -20,20 +22,22 @@ import javax.annotation.processing.Generated;
     "KotlinInternalInJava"
 })
 public final class HomeViewModel_Factory implements Factory<HomeViewModel> {
+  private final Provider<HomeRepository> repositoryProvider;
+
+  public HomeViewModel_Factory(Provider<HomeRepository> repositoryProvider) {
+    this.repositoryProvider = repositoryProvider;
+  }
+
   @Override
   public HomeViewModel get() {
-    return newInstance();
+    return newInstance(repositoryProvider.get());
   }
 
-  public static HomeViewModel_Factory create() {
-    return InstanceHolder.INSTANCE;
+  public static HomeViewModel_Factory create(Provider<HomeRepository> repositoryProvider) {
+    return new HomeViewModel_Factory(repositoryProvider);
   }
 
-  public static HomeViewModel newInstance() {
-    return new HomeViewModel();
-  }
-
-  private static final class InstanceHolder {
-    private static final HomeViewModel_Factory INSTANCE = new HomeViewModel_Factory();
+  public static HomeViewModel newInstance(HomeRepository repository) {
+    return new HomeViewModel(repository);
   }
 }

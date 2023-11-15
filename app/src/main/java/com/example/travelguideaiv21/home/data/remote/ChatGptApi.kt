@@ -1,6 +1,8 @@
 package com.example.travelguideaiv21.home.data.remote
 
+import com.example.travelguideaiv21.home.data.remote.dto.ChatRequestDto
 import com.example.travelguideaiv21.home.data.remote.dto.ChatResponseDto
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ChatGptApi {
@@ -9,5 +11,5 @@ interface ChatGptApi {
 
     }
     @POST("completions")
-    suspend fun getTravelInformation() : ChatResponseDto
+    suspend fun getTravelInformation(@Body body: ChatRequestDto) : ChatResponseDto
 }
