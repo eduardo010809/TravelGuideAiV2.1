@@ -1,5 +1,8 @@
 package com.example.travelguideaiv21.home.presentacion.components
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -13,13 +16,20 @@ import androidx.compose.ui.unit.dp
 fun HomeFilterDialog(
     modifier: Modifier = Modifier
 ){
-    AlertDialog(onDismissRequest = { /*TODO*/ },
+    AlertDialog(onDismissRequest = { /*TODO*/ }, modifier = modifier.fillMaxWidth(),
         confirmButton = {
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = { /*TODO*/ },
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    ) {
                 Text(text = "Aplicar")
             }
-        }, text = {
-            Text(text ="Hola wey")
+        },
+        text = {
+            Column(modifier =  Modifier.fillMaxWidth()) {
+
+            }
         }, shape = RoundedCornerShape(38.dp)
     )
 

@@ -38,7 +38,7 @@ fun HomeScreen(
                                  viewModel.search()
         }, placeholder = "Pais, Ciudad",
             inputText = state.searchtext, onValueChange = {viewModel.onSearchTextChange(it) },
-            modifier = Modifier.fillMaxWidth())
+            )
         HomeFilterButton(onClick = { viewModel.onFilterClick() })
     }
 
