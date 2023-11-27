@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 fun HomeFilterButton(onClick: () -> Unit,
                      modifier: Modifier=Modifier
                      ){
-    IconButton(onClick ={},
+    IconButton(onClick =onClick,
         modifier = modifier.background(
             color = Color.LightGray, shape = RoundedCornerShape(8.dp)
         )) {

@@ -22,7 +22,15 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()){
     val state = viewModel.state
     if (state.showdialog){
-        HomeFilterDialog()
+        HomeFilterDialog(
+            onDismiss = {
+                viewModel.onFilterDismiss()
+            }, filterSettings = state.filterSettings,
+            onAction = {
+                viewModel.onSettingsChange(it)
+
+            }
+        )
     }
 
     Column( modifier = Modifier.fillMaxSize()){

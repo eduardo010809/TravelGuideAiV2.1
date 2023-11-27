@@ -27,7 +27,8 @@ class HomeViewModel @Inject constructor(private val repository : HomeRepository)
     fun search() {
 
         viewModelScope.launch {
-            repository.getTravelGuide(state.searchtext).onSuccess {
+            repository.getTravelGuide(state.searchtext,
+                state.filterSettings).onSuccess {
                 println(it)
             }.onFailure {
                 println("hubo un error")
@@ -36,6 +37,54 @@ class HomeViewModel @Inject constructor(private val repository : HomeRepository)
         }
     }
 
+    fun onFilterDismiss(){
+
+        state = state.copy(
+            showdialog = false,
+            filterSettings = state.filterSettingsBackup
+            )
+    }
+
+    fun onSettingsChange(action: HomeFilterDialogAction){
+        when (action){
+            HomeFilterDialogAction.OnApplyClick -> {
+                state = state.copy(
+                    filterSettingsBackup = state.filterSettings,
+                    showdialog = false
+                )
+            }
+                HomeFilterDialogAction.OnBaresClick -> {
+                    state = state.copy(
+                        filterSettings = state.filterSettings.copy(
+                            Bares = !state.filterSettings.Bares
+                        )
+                    )
+                }
+                HomeFilterDialogAction.OnDiscotecasClick ->{
+                    state = state.copy(
+                        filterSettings = state.filterSettings.copy(
+                            Bares = !state.filterSettings.Discotecas
+                        )
+                    )
+                }
+                HomeFilterDialogAction.OnPeopleMin -> {
+                    state = state.copy(
+                        filterSettings = state.filterSettings.copy(
+                            people = state.filterSettings.people + 1
+                        )
+                    )
+                }
+                HomeFilterDialogAction.OnPeoplePlus -> {
+                    state = state.copy(
+                        filterSettings = state.filterSettings.copy(
+                           people = state.filterSettings.people - 1
+                        )
+                    )
+                }
+
+            else -> {}
+        }
+    }
     fun onFilterClick()
     {
         state = state.copy(
