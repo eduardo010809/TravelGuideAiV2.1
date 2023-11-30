@@ -1,4 +1,4 @@
-package com.example.travelguideaiv21.home.domain
+package com.example.travelguideaiv21.home.domain.model
 
 data class HomeFilterSettings(
     val people: Int=1,

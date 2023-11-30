@@ -1,6 +1,6 @@
 package com.example.travelguideaiv21.home.presentacion
 
-import com.example.travelguideaiv21.home.domain.HomeFilterSettings
+import com.example.travelguideaiv21.home.domain.model.HomeFilterSettings
 
 data class HomeState (
     val searchtext: String = "",

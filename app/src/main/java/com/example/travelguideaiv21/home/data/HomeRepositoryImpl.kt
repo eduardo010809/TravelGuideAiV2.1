@@ -2,8 +2,10 @@ package com.example.travelguideaiv21.home.data
 
 import com.example.travelguideaiv21.home.data.remote.ChatGptApi
 import com.example.travelguideaiv21.home.data.remote.dto.ChatRequestDto
-import com.example.travelguideaiv21.home.domain.HomeFilterSettings
+import com.example.travelguideaiv21.home.domain.model.HomeFilterSettings
 import com.example.travelguideaiv21.home.domain.HomeRepository
+import com.example.travelguideaiv21.home.domain.model.Places
+import com.example.travelguideaiv21.home.domain.model.Region
 
 class HomeRepositoryImpl (private val api: ChatGptApi): HomeRepository{
     override suspend fun getTravelGuide(location: String, settings: HomeFilterSettings): Result<String> {
@@ -25,5 +27,16 @@ class HomeRepositoryImpl (private val api: ChatGptApi): HomeRepository{
         catch (e: Exception){
             Result.failure(e)
         }
+    }
+
+    override suspend fun getPopularPlaces(): Result<List<Places>> {
+        return Result.success(listOf(
+            Places("USA", city = "New York", Region.AMERICA, ""),
+            Places("Argentina", city = "Salta", Region.AMERICA, ""),
+            Places("Espana", city = "Barcelona", Region.EUROPA, ""),
+            Places("Australia", city = "Sidney", Region.OCEANIA, ""),
+            Places("Japon", city = "Tokio", Region.EUROPA, ""),
+            Places("Italia", city = "Roma", Region.EUROPA, ""),
+        ))
     }
 }

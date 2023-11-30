@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.travelguideaiv21.home.presentacion.HomeFilterDialogAction
-import com.example.travelguideaiv21.home.domain.HomeFilterSettings
+import com.example.travelguideaiv21.home.domain.model.HomeFilterSettings
 
 @Composable
 fun HomeFilterDialog(
